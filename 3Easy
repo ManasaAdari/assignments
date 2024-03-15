@@ -1,0 +1,4 @@
+const delaysim=(msg,delaytime)=>{
+  setTimeout(()=>{console.log(msg);},delaytime);
+};
+delaysim("Pranusys 3rd assignment",1000);
