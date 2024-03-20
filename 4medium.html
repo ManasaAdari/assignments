@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geolocation Map</title>
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>User's Geolocation Map</h1>
+  <div id="map"></div>
+
+  <script>
+    
+    function getUserLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          showUserLocationOnMap(latitude, longitude);
+        });
+      } else {
+        console.error("Geolocation is not supported by this browser.");
+      }
+    }
+
+    function showUserLocationOnMap(latitude, longitude) {
+      const mapOptions = {
+        center: { lat: latitude, lng: longitude },
+        zoom: 15
+      };
+      new google.maps.Map(document.getElementById("map"), mapOptions);
+    }
+
+    
+    function loadMapScript() {
+      const script = document.createElement("script");
+      script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDdI1B89LMzslaswXhfmBp-NMNzoTD06a8&callback=getUserLocation`;
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+
+    
+    loadMapScript();
+  </script>
+</body>
+</html>
